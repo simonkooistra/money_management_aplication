@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('group_savings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('group_id');
+            $table->char('name');
+            $table->longText('description')->nullable();
+            $table->decimal('total_amount', total: 8,places: 2);
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->char('name');
             $table->timestamps();
         });
     }

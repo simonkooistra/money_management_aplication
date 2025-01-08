@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->char('name');
+            $table->binary('group_img')->nullable();
+            $table->longText('description')->nullable();
+            $table->decimal('total_amount', total: 8,places: 2);
             $table->timestamps();
         });
     }
