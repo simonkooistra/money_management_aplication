@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->char('name');
             $table->longText('description')->nullable();
-            $table->decimal('total_amount', 8, 2)->nullable();
+            $table->decimal('total_amount', 8, 2);
             $table->timestamps();
         });
     }
