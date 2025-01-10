@@ -13,7 +13,7 @@ class UserCategoryController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
