@@ -13,7 +13,7 @@ class UserCategoryController extends Controller
      */
     public function index()
     {
-
+        return view('user_category.index', ['user_categories' => UserCategory::all()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class UserCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('user_category.create');
     }
 
     /**
@@ -29,7 +29,11 @@ class UserCategoryController extends Controller
      */
     public function store(StoreUserCategoryRequest $request)
     {
-        //
+        $usercategory = new UserCategory();
+        $usercategory->name = $request->name;
+        $usercategory->save();
+
+        return to_route('/user_category.index', ['user_categories' => UserCategory::all()]);
     }
 
     /**
@@ -37,7 +41,7 @@ class UserCategoryController extends Controller
      */
     public function show(UserCategory $userCategory)
     {
-        //
+        return view('user_category.index', ['user_categories' => $userCategory]);
     }
 
     /**
@@ -45,7 +49,7 @@ class UserCategoryController extends Controller
      */
     public function edit(UserCategory $userCategory)
     {
-        //
+        return view('user_category.index', ['user_categories' => $userCategory]);
     }
 
     /**
@@ -53,7 +57,9 @@ class UserCategoryController extends Controller
      */
     public function update(UpdateUserCategoryRequest $request, UserCategory $userCategory)
     {
-        //
+
+
+
     }
 
     /**
