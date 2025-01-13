@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserCategory;
 use App\Http\Requests\StoreUserCategoryRequest;
 use App\Http\Requests\UpdateUserCategoryRequest;
+use App\Models\UserCategory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 
 class UserCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('user_category.index', ['user_categories' => UserCategory::all()]);
     }
@@ -19,7 +23,7 @@ class UserCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view('user_category.create');
     }
@@ -27,11 +31,13 @@ class UserCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserCategoryRequest $request)
+    public function store(StoreUserCategoryRequest $request): RedirectResponse
     {
-        $usercategory = new UserCategory();
-        $usercategory->name = $request->name;
-        $usercategory->save();
+        $user_category = new UserCategory();
+
+        $user_category->user_id = $request->input('user_id');
+        $user_category->name = $request->input('name');
+        $user_category->save();
 
         return to_route('/user_category.index', ['user_categories' => UserCategory::all()]);
     }
@@ -39,34 +45,36 @@ class UserCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserCategory $userCategory)
+    public function show(UserCategory $user_category): View|Factory|Application
     {
-        return view('user_category.index', ['user_categories' => $userCategory]);
+        return view('user_category.index', ['user_categories' => $user_category]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserCategory $userCategory)
+    public function edit(UserCategory $user_category): View|Factory|Application
     {
-        return view('user_category.index', ['user_categories' => $userCategory]);
+        return view('user_category.index', ['user_categories' => $user_category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserCategoryRequest $request, UserCategory $userCategory)
+    public function update(UpdateUserCategoryRequest $request, UserCategory $user_category): RedirectResponse
     {
-
-
-
+        $user_category->user_id = $request->input('user_id');
+        $user_category->name = $request->input('name');
+        $user_category->save();
+        return to_route('user_category.index', ['user_categories' => UserCategory::all()]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserCategory $userCategory)
+    public function destroy(UserCategory $user_category): RedirectResponse
     {
-        //
+        $user_category->delete();
+        return to_route('user_category.index', ['user_categories' => UserCategory::all()]);
     }
 }
