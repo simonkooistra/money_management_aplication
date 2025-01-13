@@ -10,9 +10,21 @@ class UserSaving extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+//    public int category_id
+//    public string $name;
+//    public string $description;
+//    public int $total_amount;
 
-    public function usercategory(): BelongsTo
+
+    public static function create(array $array)
+    {
+    }
+
+    public static function get(array $array)
+    {
+    }
+
+    public function UserCategory(): BelongsTo
     {
         return $this->belongsTo(UserCategory::class);
     }

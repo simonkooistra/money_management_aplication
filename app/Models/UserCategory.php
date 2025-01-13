@@ -13,7 +13,7 @@ class UserCategory extends Model
     public int $user_id;
     public string $name;
 
-    public function user_savings(): HasMany
+    public function UserCategory(): HasMany
     {
         return $this->hasMany(UserSaving::class);
     }
