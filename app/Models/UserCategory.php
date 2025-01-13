@@ -13,7 +13,9 @@ class UserCategory extends Model
     public int $user_id;
     public string $name;
 
-    public function UserCategory(): HasMany
+    protected $fillable = ['user_id', 'name'];
+
+    public function usersaving(): HasMany
     {
         return $this->hasMany(UserSaving::class);
     }

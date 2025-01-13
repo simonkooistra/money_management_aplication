@@ -10,8 +10,13 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'group_img','description'];
+    protected $fillable = ['name', 'group_img','description','total_amount'];
 
+    public string $name;
+    public string $group_img;
+    public string $description;
+
+    public int $total_amount;
 
     public function user(): HasMany
     {

@@ -15,8 +15,7 @@ class UserSavingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(
-    ): View|Factory|Application
+    public function index(): View|Factory|Application
     {
         return view('user_saving.index', ['user_savings' => UserSaving::all()]);
     }
@@ -24,8 +23,7 @@ class UserSavingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(
-    ): View|Factory|Application
+    public function create(): View|Factory|Application
     {
         return view('user_saving.create');
     }
@@ -35,20 +33,20 @@ class UserSavingController extends Controller
      */
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
-        UserSaving::create(array(
-            'category_id' => $request->input('category_id'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'total_amount' => $request->input('total_amount'),
-        ));
+//        UserSaving::created(array(
+//            'category_id' => $request->input('category_id'),
+//            'name' => $request->input('name'),
+//            'description' => $request->input('description'),
+//            'total_amount' => $request->input('total_amount'),
+//        ));
 
-//        $user_savings = new UserSaving();
-//
-//        $user_savings->category_id = $request->input('category_id');
-//        $user_savings->name = $request->input('name');
-//        $user_savings->description = $request->input('description');
-//        $user_savings->total_amount = $request->input('total_amount');
-//        $user_savings->save();
+        $user_savings = new UserSaving();
+
+        $user_savings->category_id = $request->input('category_id');
+        $user_savings->name = $request->input('name');
+        $user_savings->description = $request->input('description');
+        $user_savings->total_amount = $request->input('total_amount');
+        $user_savings->save();
 
         return to_route('user_saving.index', ['user_savings']);
     }
@@ -72,22 +70,21 @@ class UserSavingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserSavingRequest $request, UserSaving $user_saving): RedirectResponse
+    public function update(UpdateUserSavingRequest $request, UserSaving $user_savings): RedirectResponse
     {
-        $user_saving = UserSaving::get([
-            'category_id' => $request->input('category_id'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'total_amount' => $request->input('total_amount'),
-        ]);
+//        UserSaving::get([
+//            'category_id' => $request->input('category_id'),
+//            'name' => $request->input('name'),
+//            'description' => $request->input('description'),
+//            'total_amount' => $request->input('total_amount'),
+//        ]);
 
-//            $user_savings = new UserUpdate();
-//
-//        $user_savings->category_id = $request->input('category_id');
-//        $user_savings->name = $request->input('name');
-//        $user_savings->description = $request->input('description');
-//        $user_savings->total_amount = $request->input('total_amount');
-//        $user_savings->save();
+
+        $user_savings->category_id = $request->input('category_id');
+        $user_savings->name = $request->input('name');
+        $user_savings->description = $request->input('description');
+        $user_savings->total_amount = $request->input('total_amount');
+        $user_savings->save();
 
         return to_route('user_saving.index', ['user_savings']);
     }
@@ -95,10 +92,10 @@ class UserSavingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserSaving $userSaving)
+    public function destroy(UserSaving $user_saving): Factory|Application|View
     {
-        $userSaving->delete();
+        $user_saving->delete();
 
-        return \view('user_saving.index', ['user_savings']);
+        return view('user_saving.index', ['user_savings' => UserSaving::all()]);
     }
 }
