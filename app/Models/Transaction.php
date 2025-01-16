@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','min_amount','plus_amount'];
+    protected $fillable = ['name', 'min_amount', 'plus_amount'];
 
     public int $user_id;
     public int $saving_id;
@@ -20,9 +20,20 @@ class Transaction extends Model
     public int $plus_amount;
 
 
-    public function user(): HasMany
+    public function users(): BelongsTo
     {
-        return $this->HasMany(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function savings(): BelongsTo
+    {
+        return $this->belongsTo(UserSaving::class);
+    }
+
+
+    public function groups(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
     }
 
 }

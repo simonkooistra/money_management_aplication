@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -47,10 +48,25 @@ class User extends Authenticatable
         ];
     }
 
-    public function group(): BelongsTo
+    public function groups(): BelongsTo
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function userCategories(): HasMany
+    {
+        return $this->hasMany(UserCategory::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+//    public function savings(): HasMany
+//    {
+//        return $this->hasMany(UserSaving::class);
+//    }
 }
 
 

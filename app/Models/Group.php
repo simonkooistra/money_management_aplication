@@ -18,8 +18,13 @@ class Group extends Model
 
     public int $total_amount;
 
-    public function user(): HasMany
+    public function users(): HasMany
     {
         return $this->HasMany(User::class);
+    }
+
+    public  function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

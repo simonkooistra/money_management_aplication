@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -18,7 +19,11 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
-        return view('transactions.index', ['transactions' => Transaction::all()]);
+        return view('transactions.index', [
+            'transactions' => Transaction::all(),
+            'saving' => UserSaving::all(),
+            'total' => UserSaving::all()->sum('amount')
+        ]);
     }
 
     /**

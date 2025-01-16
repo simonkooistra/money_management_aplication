@@ -37,7 +37,7 @@ class UserCategoryController extends Controller
 
         $user_category->user_id = $request->input('user_id');
         $user_category->name = $request->input('name');
-        $user_category->save();
+        auth()->users()->categories()->save($user_category);
 
         return to_route('/user_category.index', ['user_categories' => UserCategory::all()]);
     }
@@ -65,7 +65,8 @@ class UserCategoryController extends Controller
     {
         $user_category->user_id = $request->input('user_id');
         $user_category->name = $request->input('name');
-        $user_category->save();
+        auth()->user()->userCategories()->save($user_category);
+
         return to_route('user_category.index', ['user_categories' => UserCategory::all()]);
     }
 

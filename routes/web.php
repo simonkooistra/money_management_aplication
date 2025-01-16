@@ -15,7 +15,7 @@ Route::resources([
     'transaction' => TransactionController::class,
     'user_category' => UserCategoryController::class,
     'user_saving' => UserSavingController::class
-]);
+])->middleware('auth');
 
 //Route::resource('group', GroupController::class);
 //Route::resource('transaction', TransactionController::class);

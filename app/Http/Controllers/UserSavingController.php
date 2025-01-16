@@ -46,7 +46,7 @@ class UserSavingController extends Controller
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
-        $user_savings->save();
+        auth()->user()->savings()->save($user_savings);
 
         return to_route('user_saving.index', ['user_savings']);
     }
