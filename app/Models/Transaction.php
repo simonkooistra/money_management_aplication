@@ -31,9 +31,4 @@ class Transaction extends Model
     }
 
 
-    public function groups(): BelongsTo
-    {
-        return $this->belongsTo(Group::class);
-    }
-
 }

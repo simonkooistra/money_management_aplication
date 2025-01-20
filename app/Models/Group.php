@@ -10,7 +10,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'group_img','description','total_amount'];
+    protected $fillable = ['name', 'group_img', 'description', 'total_amount'];
 
     public string $name;
     public string $group_img;
@@ -23,8 +23,4 @@ class Group extends Model
         return $this->HasMany(User::class);
     }
 
-    public  function transactions(): HasMany
-    {
-        return $this->hasMany(Transaction::class);
-    }
 }
