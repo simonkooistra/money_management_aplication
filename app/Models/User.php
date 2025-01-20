@@ -4,12 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -44,4 +48,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function groups(): HasOne
+    {
+        return $this->hasOne(Group::class);
+    }
+
+    public function userCategories(): HasMany
+    {
+        return $this->hasMany(UserCategory::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+//    public function savings(): HasMany
+//    {
+//        return $this->hasMany(UserSaving::class);
+//    }
 }
+
+
