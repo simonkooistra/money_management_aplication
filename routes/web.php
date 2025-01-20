@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('login');
+    return view('home');
 })->middleware('auth');
 
 Route::resources([
@@ -16,7 +16,15 @@ Route::resources([
     'transaction' => TransactionController::class,
     'user_category' => UserCategoryController::class,
     'user_saving' => UserSavingController::class
-])->middleware('auth');
+], [
+    'middleware' => ['auth']
+]);
+
+//Route::get('/test', function () {
+//    $saving = \App\Models\UserSaving::first();
+//
+//    dd($saving->transactions->sum('amount'));
+//});
 
 //Route::resource('group', GroupController::class);
 //Route::resource('transaction', TransactionController::class);
