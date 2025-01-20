@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('auth');
+
 Route::resources([
     'group' => GroupController::class,
     'transaction' => TransactionController::class,
@@ -21,4 +22,5 @@ Route::resources([
 //Route::resource('transaction', TransactionController::class);
 //Route::resource('user_category', UserCategoryController::class);
 //Route::resource('user_saving', UserSavingController::class);
+
 
