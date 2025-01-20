@@ -22,5 +22,3 @@ Route::resources([
 //Route::resource('transaction', TransactionController::class);
 //Route::resource('user_category', UserCategoryController::class);
 //Route::resource('user_saving', UserSavingController::class);
-
-
