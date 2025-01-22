@@ -17,9 +17,9 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $price = 1000 ;
+        $user_savings = auth()->user()->savings;
 
-        return view('user_savings', ['prices' => $price]);
+        return view('user_saving.index', ['user_savings' => $user_savings]);
     }
 
     /**
@@ -28,8 +28,16 @@ class UserSavingController extends Controller
     public function create(): View|Factory|Application
     {
 
-        $categories = auth()->user()->categories;
-        return view('user_saving.create');
+        $categories = auth()->user()->userCategories;
+
+
+        if ($categories->isEmpty()) {
+
+            dd('No categories found.');
+        }
+
+        // Pass the categories to the view if they exist
+        return view('user_saving.create', ['categories' => $categories]);
     }
 
     /**
