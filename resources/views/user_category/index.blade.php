@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 
-@section('title', 'Home')
+@section('title', 'User Categories')
 
 @section('content')
-    <h1> dit is een donders test</h1>
+    <h1>category</h1>
     <p>Dit is een test</p>
 @endsection
