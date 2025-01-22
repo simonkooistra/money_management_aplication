@@ -27,6 +27,8 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
+
+        $categories = auth()->user()->categories;
         return view('user_saving.create');
     }
 
@@ -66,7 +68,12 @@ class UserSavingController extends Controller
      */
     public function edit(UserSaving $user_saving): View|Factory|Application
     {
-        return view('user_saving.index', ['user_saving' => $user_saving]);
+        if ($user_saving->user_id != auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+
+        return view('user_saving.edit', compact('user_saving'));
     }
 
     /**
