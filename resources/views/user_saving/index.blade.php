@@ -20,8 +20,12 @@
                         <strong>{{ $goal->name }}</strong> - €{{ $goal->total_amount }}
                         <p>{{ $goal->description }}</p>
 
-
                         <a href="{{ route('user_saving.edit', $goal->id) }}" class="btn" style="background-color: #ffc107; margin-left: 10px;">Edit</a>
+                        <form action="{{ route('user_saving.destroy', $goal->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn" style="background-color: #dc3545; margin-left: 10px;" onclick="return confirm('Are you sure you want to delete this saving goal?')">Delete</button>
+                        </form>
                     </li>
                 @endforeach
             </ul>
