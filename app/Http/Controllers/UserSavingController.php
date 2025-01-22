@@ -18,7 +18,7 @@ class UserSavingController extends Controller
     public function index(): View|Factory|Application
     {
 
-        $user_savings = auth()->user()->user_savings;
+        $user_savings = auth()->user()->savings();
         return view('user_saving.index', ['user_savings' => $user_savings]);
     }
 
@@ -27,8 +27,16 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->categories;
-        return view('user_saving.create');
+        $categories = auth()->user()->userCategories();
+
+
+        if ($categories->isEmpty()) {
+
+            dd('No categories found.');
+        }
+
+        // Pass the categories to the view if they exist
+        return view('user_saving.create', ['categories' => $categories]);
     }
 
     /**
@@ -36,6 +44,13 @@ class UserSavingController extends Controller
      */
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
+//        UserSaving::created(array(
+//            'category_id' => $request->input('category_id'),
+//            'name' => $request->input('name'),
+//            'description' => $request->input('description'),
+//            'total_amount' => $request->input('total_amount'),
+//        ));
+
         $user_savings = new UserSaving();
 
         $user_savings->category_id = $request->input('category_id');
@@ -44,8 +59,7 @@ class UserSavingController extends Controller
         $user_savings->total_amount = $request->input('total_amount');
         auth()->user()->savings()->save($user_savings);
 
-
-            return redirect()->route('user_saving.index')->with('success', 'Saving goal created successfully!');
+        return to_route('user_saving.index', ['user_savings']);
     }
 
     /**
@@ -86,8 +100,7 @@ class UserSavingController extends Controller
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
-//
-        auth()->user()->savings()->save($user_savings);
+        $user_savings->save();
 
         return to_route('user_saving.index', ['user_savings']);
     }
