@@ -17,7 +17,9 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('user_saving.index', ['user_savings' => UserSaving::all()]);
+        $price = 1000 ;
+
+        return view('user_savings', ['prices' => $price]);
     }
 
     /**

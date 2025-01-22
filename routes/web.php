@@ -10,7 +10,6 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth');
 
-
 Route::middleware('auth')->group(function () {
     Route::resources([
         'group' => GroupController::class,

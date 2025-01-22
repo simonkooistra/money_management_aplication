@@ -64,10 +64,10 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-//    public function savings(): HasMany
-//    {
-//        return $this->hasMany(UserSaving::class);
-//    }
+    public function savings(): HasMany
+    {
+        return $this->hasMany(UserSaving::class, 'user_id');
+    }
 }
 
 
