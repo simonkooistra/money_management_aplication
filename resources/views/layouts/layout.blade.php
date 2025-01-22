@@ -15,9 +15,9 @@
     <aside class="sidebar">
         <ul class="nav-links">
             <li><a href="/">Home (totaalpagina)</a></li>
-            <li><a href="{{ route('user_category.index') }}">Categorieën</a></li>
-            <li><a href="{{ route('user_saving.index') }}">Spaardoelen</a></li>
-            <li><a href="{{ route('transaction.index') }}">Transacties</a></li>
+            <li><a href="{{ route('user_category.index') }}">Categories</a></li>
+            <li><a href="{{ route('user_saving.index') }}">Savings</a></li>
+            <li><a href="{{ route('transaction.index') }}">Transactions</a></li>
         </ul>
 
         <form action="{{ route('logout') }}" method="POST">

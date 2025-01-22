@@ -34,12 +34,11 @@ class UserCategoryController extends Controller
     public function store(StoreUserCategoryRequest $request): RedirectResponse
     {
         $user_category = new UserCategory();
-
-        $user_category->user_id = $request->input('user_id');
+        $user_category->user_id = auth()->id();
         $user_category->name = $request->input('name');
-        auth()->users()->categories()->save($user_category);
+        $user_category->save();
 
-        return to_route('/user_category.index', ['user_categories' => UserCategory::all()]);
+        return redirect()->route('user_category.index');
     }
 
     /**

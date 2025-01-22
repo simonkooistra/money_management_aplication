@@ -8,14 +8,18 @@
     background-color: #f9f9f9;
 }
 
-/* Sidebar */
+
 .sidebar {
     width: 200px;
     background-color: #ddd;
     padding: 10px;
 }
 
-/* Navigation Links */
+.btn
+{
+
+}
+
 .nav-links {
     list-style: none;
     padding: 0;

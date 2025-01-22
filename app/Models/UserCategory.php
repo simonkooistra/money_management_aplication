@@ -11,9 +11,6 @@ class UserCategory extends Model
 {
     use HasFactory;
 
-    public int $user_id;
-    public string $name;
-
     protected $fillable = ['user_id', 'name'];
 
     public function savings(): HasMany
