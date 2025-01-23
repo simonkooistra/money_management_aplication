@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_savings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->nullable()->constrained('user_categories')->onDelete('cascade'); // This ensures it's not nullable
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->char('name');
             $table->longText('description')->nullable();
             $table->decimal('total_amount', 8, 2);

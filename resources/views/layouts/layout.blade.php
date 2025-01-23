@@ -18,11 +18,12 @@
             <li><a href="{{ route('user_category.index') }}">Categories</a></li>
             <li><a href="{{ route('user_saving.index') }}">Savings</a></li>
             <li><a href="{{ route('transaction.index') }}">Transactions</a></li>
+            <li><a href="{{ route('instruct') }}">Instruction</a></li>
         </ul>
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <input type="submit" value="uitloggen">
+            <input type="submit" value="Logout">
         </form>
     </aside>
 
