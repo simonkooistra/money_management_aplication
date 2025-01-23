@@ -46,13 +46,6 @@ class UserSavingController extends Controller
      */
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
-//        UserSaving::created(array(
-//            'category_id' => $request->input('category_id'),
-//            'name' => $request->input('name'),
-//            'description' => $request->input('description'),
-//            'total_amount' => $request->input('total_amount'),
-//        ));
-
         $user_savings = new UserSaving();
         $user_savings->category_id = $request->input('category_id');
         $user_savings->name = $request->input('name');
