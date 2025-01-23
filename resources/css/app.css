@@ -28,6 +28,8 @@ html body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
+    width: 18rem;
+
 }
 
 
@@ -90,6 +92,17 @@ html body {
     margin-top: 1em;
 }
 
+.transaction {
+
+}
+
+.content {
+    display: flex;
+    margin: 2rem 17rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
 
 .sidebar input[type="submit"] {
     background-color: #ccc;
