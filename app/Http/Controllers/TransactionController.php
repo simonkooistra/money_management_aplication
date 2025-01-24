@@ -48,7 +48,9 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request): RedirectResponse
     {
         $transaction = new Transaction();
-
+        /**
+         * @todo fix validation
+         */
         $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
