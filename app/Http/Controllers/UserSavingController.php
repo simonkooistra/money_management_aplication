@@ -18,7 +18,7 @@ class UserSavingController extends Controller
     public function index(): View|Factory|Application
     {
 
-        $user_savings = auth()->user()->savings();
+        $user_savings = auth()->user()->savings;
         return view('user_saving.index', ['user_savings' => $user_savings]);
     }
 
@@ -27,7 +27,7 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->userCategories();
+        $categories = auth()->user()->userCategories;
 
 
         if ($categories->isEmpty()) {
