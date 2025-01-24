@@ -54,7 +54,7 @@ class UserCategoryController extends Controller
      */
     public function edit(UserCategory $user_category): View|Factory|Application
     {
-        return view('user_category.index', ['user_categories' => $user_category]);
+        return view('user_category.edit', ['user_category' => $user_category]);
     }
 
     /**

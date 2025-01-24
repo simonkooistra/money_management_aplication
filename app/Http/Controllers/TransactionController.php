@@ -22,7 +22,6 @@ class TransactionController extends Controller
         return view('transactions.index', [
             'transactions' => Transaction::all(),
             'saving' => UserSaving::all(),
-            'total' => UserSaving::all()->sum('amount')
         ]);
     }
 
@@ -44,7 +43,9 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request): RedirectResponse
     {
         $transaction = new Transaction();
-
+        /**
+         * @todo fix validation
+         */
         $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
@@ -76,12 +77,13 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-        $transaction->user_id = $request->input('user_id');
+        //$transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->min_amount = $request->input('min_amount');
         $transaction->plus_amount = $request->input('plus_amount');
-        $transaction->save();
+        auth()->user()->transactions()->save($transaction);
+        //$transaction->save();
 
         return to_route('transactions.index', ['transactions']);
     }

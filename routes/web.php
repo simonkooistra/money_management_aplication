@@ -6,9 +6,10 @@ use App\Http\Controllers\UserCategoryController;
 use App\Http\Controllers\UserSavingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+
+use App\Http\Controllers\TotalController;
+
+Route::get('/', [TotalController::class, 'index'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::resources([
@@ -17,4 +18,8 @@ Route::middleware('auth')->group(function () {
         'user_category' => UserCategoryController::class,
         'user_saving' => UserSavingController::class,
     ]);
+
+    Route::get('/instruct', function () {
+        return view('instruct');
+    })->name('instruct');
 });

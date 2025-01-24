@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserSavingRequest;
 use App\Http\Requests\UpdateUserSavingRequest;
 use App\Models\UserSaving;
+use App\Models\UserCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -17,8 +18,8 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-//        $price = 1000;
         $user_savings = auth()->user()->savings;
+
         return view('user_saving.index', ['user_savings' => $user_savings]);
     }
 
@@ -27,8 +28,17 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->categories;
-        return view('user_saving.create');
+
+        $categories = auth()->user()->userCategories;
+
+
+        if ($categories->isEmpty()) {
+
+            dd('No categories found.');
+        }
+
+
+        return view('user_saving.create', ['categories' => $categories]);
     }
 
     /**
@@ -37,14 +47,14 @@ class UserSavingController extends Controller
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
         $user_savings = new UserSaving();
-
         $user_savings->category_id = $request->input('category_id');
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
         auth()->user()->savings()->save($user_savings);
 
-        return to_route('user_saving.index', ['user_savings']);
+
+            return redirect()->route('user_saving.index')->with('success', 'Saving goal created successfully!');
     }
 
     /**
@@ -60,12 +70,11 @@ class UserSavingController extends Controller
      */
     public function edit(UserSaving $user_saving): View|Factory|Application
     {
-        if ($user_saving->user_id != auth()->id()) {
-            abort(403, 'Unauthorized action.');
-        }
-
-
-        return view('user_saving.edit', compact('user_saving'));
+        $categories = UserCategory::all();
+        return view('user_saving.edit', [
+            'user_saving' => $user_saving,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -85,9 +94,11 @@ class UserSavingController extends Controller
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
-        $user_savings->save();
+//        $user_savings->save();
+        auth()->user()->savings()->save($user_savings);
 
-        return to_route('user_saving.index', ['user_savings']);
+        // Redirect to index after successful update
+        return redirect()->route('user_saving.index')->with('success', 'Saving goal updated successfully!');
     }
 
     /**

@@ -20,14 +20,21 @@
             @csrf
 
             <label for="category_id">Category:</label>
+
             <select name="category_id" id="category_id" required>
                 <option value="">-- Select Category --</option> <!-- Placeholder Option -->
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
+
+                @if($categories->isEmpty())
+                    <option value="">No categories available</option>  <!-- Fallback message -->
+                @else
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                @endif
             </select>
+
 
             <label for="name">Saving Goal Name:</label>
             <input type="text" name="name" id="name" placeholder="Enter Saving Goal Name..." value="{{ old('name') }}" required>
