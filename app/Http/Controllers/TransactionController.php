@@ -30,7 +30,11 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        return view('transactions.create', ['transaction' => Transaction::all()]);
+
+        $savings = UserSaving::where('user_id', auth()->id())->get();
+        return view('transactions.create', [
+            'userSavings' => $savings,
+        ]);
     }
 
     /**
@@ -45,9 +49,9 @@ class TransactionController extends Controller
         $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
-        $transaction->min_amount = $request->input('min_amount');
-        $transaction->plus_amount = $request->input('plus_amount');
-        $transaction->save();
+        $transaction->amount = $request->input('amount');
+
+        auth()->user()->transactions()->save($transaction);
 
         return to_route('transactions.index', ['transactions']);
     }

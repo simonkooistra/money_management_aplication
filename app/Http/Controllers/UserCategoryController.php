@@ -36,7 +36,7 @@ class UserCategoryController extends Controller
         $user_category = new UserCategory();
         $user_category->user_id = auth()->id();
         $user_category->name = $request->input('name');
-        $user_category->save();
+        auth()->user()->userCategories()->save($user_category);
 
         return redirect()->route('user_category.index');
     }

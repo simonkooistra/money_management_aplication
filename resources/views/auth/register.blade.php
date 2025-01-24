@@ -9,7 +9,7 @@
     <title>Registreren</title>
 </head>
 
-<body>
+<body class="login">
 <form action="{{ route('register') }}" method="post">
     @csrf
 
@@ -24,7 +24,7 @@
     <div class="container">
         <h1>Account registreren</h1>
         <p>Maak hier uw account aan!</p>
-        <hr>
+
 
         <input type="text" placeholder="Volledige naam" name="name" id="name" required>
         @error('name')
@@ -41,14 +41,15 @@
         <span style="color:red;">{{ $message }}</span>
         @enderror
 
-        <input type="password" placeholder="Herhaal wachtwoord" name="password_confirmation" id="password_confirmation" required>
-        <hr>
+        <input type="password" placeholder="Herhaal wachtwoord" name="password_confirmation" id="password_confirmation"
+               required>
+
 
         <button type="submit" value="Register" class="registerbtn">Registreren</button>
     </div>
 
     <div class="container signin">
-        <p>Heb je al een account? <a href="{{ route('login') }}">Log in</a>.</p>
+        <p>Heb je al een account? <a href="{{ route('login') }}">Log in</a></p>
     </div>
 </form>
 </body>

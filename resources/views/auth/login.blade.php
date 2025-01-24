@@ -9,31 +9,35 @@
     <title>Aanmelden</title>
 </head>
 
-<body>
+<body class="login">
 <form action="{{ route('login') }}" method="post">
     @csrf
 
     <div class="container">
         <h1>Aanmelden</h1>
 
-        <input type="text" placeholder="Email Address" name="email" required>
         @error('email')
         <span class="text-message">{{ $message }}</span>
         @enderror
+        <input type="text" placeholder="Email Address" name="email" required>
 
-
-        <input type="password" placeholder="Wachtwoord" name="password" required>
         @error('password')
         <span class="text-message">{{ $message }}</span>
         @enderror
 
-        <button type="submit">Aanmelden</button>
+        <input type="password" placeholder="Wachtwoord" name="password" required>
+
+        <div class="container">
+
+            <button type="submit">Aanmelden</button>
+
+{{--            <a href="#">Wachtwoord vergeten?</a>--}}
+
+            <a href="register">Registreren?</a>
+
+        </div>
     </div>
 
-    <div class="container">
-
-        <a href="#">Wachtwoord vergeten?</a>
-    </div>
 </form>
 </body>
 
