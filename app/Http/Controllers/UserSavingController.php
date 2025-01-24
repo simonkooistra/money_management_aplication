@@ -35,7 +35,7 @@ class UserSavingController extends Controller
             dd('No categories found.');
         }
 
-        // Pass the categories to the view if they exist
+
         return view('user_saving.create', ['categories' => $categories]);
     }
 
@@ -80,7 +80,7 @@ class UserSavingController extends Controller
         }
 
 
-        return view('user_saving.edit', compact('user_saving'));
+        return view('user_saving.edit', ['user_saving' => $user_saving]);
     }
 
     /**

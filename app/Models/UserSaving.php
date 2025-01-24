@@ -33,8 +33,4 @@ class UserSaving extends Model
         return $this->hasMany(Transaction::class, 'user_id');
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
