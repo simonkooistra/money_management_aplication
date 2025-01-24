@@ -17,8 +17,8 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-//        $price = 1000;
-        $user_savings = auth()->user()->savings;
+
+        $user_savings = auth()->user()->user_savings;
         return view('user_saving.index', ['user_savings' => $user_savings]);
     }
 
@@ -27,8 +27,8 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->categories;
-        return view('user_saving.create');
+        $user_categories = auth()->user()->userCategories;
+        return view('user_saving.create',[ 'categories' => $user_categories]);
     }
 
     /**
@@ -37,12 +37,12 @@ class UserSavingController extends Controller
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
         $user_savings = new UserSaving();
-
         $user_savings->category_id = $request->input('category_id');
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
-        auth()->user()->savings()->save($user_savings);
+        $user_savings->user_id = auth()->user()->id;
+        $user_savings->save();
 
         return to_route('user_saving.index', ['user_savings']);
     }

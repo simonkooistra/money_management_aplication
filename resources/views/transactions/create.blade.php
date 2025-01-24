@@ -19,11 +19,13 @@
             <label for="name">name:</label><br>
             <input type="text" id="name" name="name" value=""><br>
 
-            <input type="text" id="amount" name="amount" placeholder="amount">
+            <input type="number" id="amount" name="amount" placeholder="amount">
+            <select name="saving_id">
+                @foreach($userSavings as $saving)
+                    <option value="{{ $saving->id }}">{{ $saving->name }}</option>
+                @endforeach
+            </select>
 
-            @foreach($userSavings as $saving)
-                {{ $saving->name }}
-            @endforeach
 
             {{--submit button sends form to the controller--}}
             <input type="submit" value="make change"><br><br>

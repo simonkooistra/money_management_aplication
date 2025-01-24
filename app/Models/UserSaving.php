@@ -11,11 +11,6 @@ class UserSaving extends Model
 {
     use HasFactory;
 
-    public int $category_id;
-    public string $name;
-    public string $description;
-    public int $total_amount;
-
     public $fillable = ['category_id', 'name', 'description', 'total_amount'];
 
     public function user(): BelongsTo
