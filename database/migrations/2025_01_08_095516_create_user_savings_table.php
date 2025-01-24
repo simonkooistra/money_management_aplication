@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_savings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id');
+            $table->foreignId('user_id');
             $table->char('name');
             $table->longText('description')->nullable();
             $table->decimal('total_amount', 8, 2);

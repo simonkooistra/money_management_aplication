@@ -18,13 +18,17 @@ class UserSaving extends Model
 
     public $fillable = ['category_id', 'name', 'description', 'total_amount'];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function user_Category(): BelongsTo
     {
         return $this->belongsTo(UserCategory::class);
     }
 
-    public function transaction(): HasMany
+    public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class, 'user_id');
     }
