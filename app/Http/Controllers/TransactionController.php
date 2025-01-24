@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,7 @@ class TransactionController extends Controller
         return view('transactions.index', [
             'transactions' => Transaction::all(),
             'saving' => UserSaving::all(),
+            'total' => UserSaving::all()->sum('amount')
         ]);
     }
 
@@ -30,10 +32,13 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
+        $cat = UserCategory::where('user_id', auth()->id())->get();
 
         $savings = UserSaving::where('user_id', auth()->id())->get();
+
         return view('transactions.create', [
             'userSavings' => $savings,
+            'cat' => $cat,
         ]);
     }
 
@@ -53,7 +58,7 @@ class TransactionController extends Controller
 
         auth()->user()->transactions()->save($transaction);
 
-        return to_route('transactions.index', ['transactions']);
+        return to_route('transaction.index');
     }
 
     /**
@@ -77,15 +82,14 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-        //$transaction->user_id = $request->input('user_id');
-        $transaction->saving_id = $request->input('saving_id');
+       // $transaction->user_id = $request->input('user_id');
+      //  $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
-        $transaction->min_amount = $request->input('min_amount');
-        $transaction->plus_amount = $request->input('plus_amount');
-        auth()->user()->transactions()->save($transaction);
-        //$transaction->save();
+        $transaction->amount = $request->input('amount');
+        $transaction->save();
+//        auth()->user()->transactions()->save($transaction);
 
-        return to_route('transactions.index', ['transactions']);
+        return to_route('transaction.index');
     }
 
     /**
@@ -95,6 +99,6 @@ class TransactionController extends Controller
     {
         $transaction->delete();
 
-        return to_route('transactions.index', ['transactions' => Transaction::all()]);
+        return to_route('transaction.index', ['transactions' => Transaction::all()]);
     }
 }
