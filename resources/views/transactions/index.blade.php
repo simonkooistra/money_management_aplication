@@ -13,8 +13,8 @@
         @else
             <tr>
                 <th> user_id</th>
-                <th> saving_id</th>
-                <th> name</th>
+                <th> saving nam</th>
+                <th> transaction name</th>
                 <th>created_add</th>
                 <th> amount</th>
                 <th></th>
@@ -22,8 +22,8 @@
             </tr>
             @foreach($transactions as $transaction)
                 <tr>
-                    <td>{{$transaction->user_id}}</td>
-                    <td>{{$transaction->saving_id}}</td>
+                    <td>{{$user_name->name}}</td>
+                    <td>{{$saving->name}}</td>
                     <td>{{$transaction->name}}</td>
                     <td>{{$transaction->created_add}}</td>
                     <td>{{$transaction->amount}}</td>

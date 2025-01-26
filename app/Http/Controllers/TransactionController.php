@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
@@ -20,10 +21,12 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
+//@todo ask about relation
         return view('transactions.index', [
             'transactions' => Transaction::all(),
             'saving' => UserSaving::all(),
-            'total' => UserSaving::all()->sum('amount')
+            'total' => UserSaving::all()->sum('amount'),
+            'user_name'=> User::all()
         ]);
     }
 
@@ -32,13 +35,13 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $cat = UserCategory::where('user_id', auth()->id())->get();
+        $category = UserCategory::where('user_id', auth()->id())->get();
 
         $savings = UserSaving::where('user_id', auth()->id())->get();
 
         return view('transactions.create', [
             'userSavings' => $savings,
-            'cat' => $cat,
+            'category' => $category,
         ]);
     }
 
@@ -82,12 +85,9 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-       // $transaction->user_id = $request->input('user_id');
-      //  $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->amount = $request->input('amount');
-        $transaction->save();
-//        auth()->user()->transactions()->save($transaction);
+        auth()->user()->transactions()->save($transaction);
 
         return to_route('transaction.index');
     }

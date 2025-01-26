@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserSavingRequest;
 use App\Http\Requests\UpdateUserSavingRequest;
+use App\Models\Transaction;
+use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,9 +19,14 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-
         $user_savings = auth()->user()->savings;
-        return view('user_saving.index', ['user_savings' => $user_savings]);
+        return view('user_saving.index', [
+            'user_savings' => $user_savings,
+
+            'transactions' => Transaction::all(),
+            'saving' => UserSaving::all(),
+            'total' => UserSaving::all()->sum('amount')
+        ]);
     }
 
     /**
@@ -28,15 +35,17 @@ class UserSavingController extends Controller
     public function create(): View|Factory|Application
     {
         $categories = auth()->user()->userCategories;
-
+        $category = UserCategory::where('user_id', auth()->id())->get();
 
         if ($categories->isEmpty()) {
-
             dd('No categories found.');
         }
 
         // Pass the categories to the view if they exist
-        return view('user_saving.create', ['categories' => $categories]);
+        return view('user_saving.create', [
+            'categories' => $categories,
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -44,13 +53,6 @@ class UserSavingController extends Controller
      */
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
-//        UserSaving::created(array(
-//            'category_id' => $request->input('category_id'),
-//            'name' => $request->input('name'),
-//            'description' => $request->input('description'),
-//            'total_amount' => $request->input('total_amount'),
-//        ));
-
         $user_savings = new UserSaving();
 
         $user_savings->category_id = $request->input('category_id');
