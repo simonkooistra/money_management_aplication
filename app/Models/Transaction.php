@@ -18,10 +18,8 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function savings(): BelongsTo
+    public function userSaving(): BelongsTo
     {
-        return $this->belongsTo(UserSaving::class);
+        return $this->belongsTo(UserSaving::class, 'saving_id');
     }
-
-
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserSavingRequest;
 use App\Http\Requests\UpdateUserSavingRequest;
+use App\Models\Transaction;
+use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,10 +31,9 @@ class UserSavingController extends Controller
     public function create(): View|Factory|Application
     {
         $categories = auth()->user()->userCategories;
-
+        $category = UserCategory::where('user_id', auth()->id())->get();
 
         if ($categories->isEmpty()) {
-
             dd('No categories found.');
         }
 
@@ -45,13 +46,6 @@ class UserSavingController extends Controller
      */
     public function store(StoreUserSavingRequest $request): RedirectResponse
     {
-//        UserSaving::created(array(
-//            'category_id' => $request->input('category_id'),
-//            'name' => $request->input('name'),
-//            'description' => $request->input('description'),
-//            'total_amount' => $request->input('total_amount'),
-//        ));
-
         $user_savings = new UserSaving();
 
         $user_savings->category_id = $request->input('category_id');
@@ -89,14 +83,7 @@ class UserSavingController extends Controller
      */
     public function update(UpdateUserSavingRequest $request, UserSaving $user_savings): RedirectResponse
     {
-//        UserSaving::get([
-//            'category_id' => $request->input('category_id'),
-//            'name' => $request->input('name'),
-//            'description' => $request->input('description'),
-//            'total_amount' => $request->input('total_amount'),
-//        ]);
-
-
+//
         $user_savings->category_id = $request->input('category_id');
         $user_savings->name = $request->input('name');
         $user_savings->description = $request->input('description');

@@ -21,9 +21,7 @@ class TransactionController extends Controller
     public function index(): View|Factory|Application
     {
         return view('transactions.index', [
-            'transactions' => Transaction::where('user_id', auth()->id())->get(),
-            'saving' => UserSaving::all(),
-            'total' => UserSaving::all()->sum('amount')
+            'transactions' => Transaction::where('user_id', auth()->user()->id)->get(),
         ]);
     }
 
@@ -32,13 +30,13 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $cat = UserCategory::where('user_id', auth()->id())->get();
+        $category = UserCategory::where('user_id', auth()->id())->get();
 
         $savings = UserSaving::where('user_id', auth()->id())->get();
 
         return view('transactions.create', [
             'userSavings' => $savings,
-            'cat' => $cat,
+            'category' => $category,
         ]);
     }
 
@@ -82,12 +80,9 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-       // $transaction->user_id = $request->input('user_id');
-      //  $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->amount = $request->input('amount');
-        $transaction->save();
-//        auth()->user()->transactions()->save($transaction);
+        auth()->user()->transactions()->save($transaction);
 
         return to_route('transaction.index');
     }

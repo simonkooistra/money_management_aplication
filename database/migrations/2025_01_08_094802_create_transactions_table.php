@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('saving_id');
             $table->char('name');
+            $table->datetimes('add_at');
             $table->decimal('min_amount', total: 8,places: 2)->nullable();
             $table->decimal('plus_amount', total: 8,places: 2)->nullable();
             $table->timestamps();
