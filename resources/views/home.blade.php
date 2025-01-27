@@ -9,7 +9,8 @@
     <ul>
         @forelse ($savings as $saving)
             <li>
-                <strong>{{ $saving->name }}</strong>: &#8364;{{ $saving->total_amount }} {{ $saving->currency ?? '' }} - Already saved:  &#8364; {{ $saving->transactions->sum('amount') }}
+                <strong>{{ $saving->name }}</strong>: &#8364;{{ $saving->total_amount }} {{ $saving->currency ?? '' }} -
+                Already saved: &#8364; {{ $saving->transactions->sum('amount') }}
                 <p>{{ $saving->description }}</p>
             </li>
         @empty

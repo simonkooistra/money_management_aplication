@@ -23,7 +23,7 @@
 
     <div class="container">
         <h1>register</h1>
-        <p>make your own account!</p>
+        <p>make an account!</p>
 
         <input type="text" placeholder="full name..." name="name" id="name" required>
         @error('name')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserTransactionRequest extends FormRequest
@@ -17,12 +18,14 @@ class StoreUserTransactionRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:3|max:50',
+            'make_date' => 'nullable|date|date_format:Y-m-d|before:today',
+            'amount' => 'nullable|numeric|max:999999.99|min:-9999.99',
         ];
     }
 }

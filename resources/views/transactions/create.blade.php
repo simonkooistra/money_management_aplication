@@ -14,17 +14,19 @@
             @error('name')
             {{ $message }}<br>
             @enderror
-
-            {{--textfield for the name of the transaction --}}
-            <label for="name">name:</label><br>
-            <input type="text" id="name" name="name" value=""><br>
-
-            <input type="number" id="amount" name="amount" placeholder="amount">
-            <select name="saving_id">
+            <label for="saving">savings goal</label>
+            <select name="saving_id"id="saving">
                 @foreach($userSavings as $saving)
                     <option value="{{ $saving->id }}">{{ $saving->name }}</option>
                 @endforeach
             </select>
+            {{--textfield for the name of the transaction --}}
+            <label for="name">name:</label><br>
+            <input type="text" id="name" name="name" placeholder="name..." required><br>
+            <label for="make_date">add a date:</label>
+            <input type="date" id="make_date" name="make" placeholder="">
+            <input type="number" id="amount" name="amount" placeholder="amount" required>
+
 
 
             {{--submit button sends form to the controller--}}
