@@ -10,7 +10,7 @@
         @csrf
         <fieldset>
             <legend>Create transaction:</legend>
-   {{--shows error message for description if name is not filled in correctly--}}
+   {{--shows error message for name if name is not filled in correctly--}}
             @error('name')
             {{ $message }}<br>
             @enderror

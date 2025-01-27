@@ -12,6 +12,7 @@
                 <th>Transaction Name</th>
                 <th>Created At</th>
                 <th>
+                    {{$date_made = $transactions->make_date}}
                     @if($date_made ==! 0)
                         {{ auth()->user()->name }} add at
                       @endif

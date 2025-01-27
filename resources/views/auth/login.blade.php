@@ -33,7 +33,7 @@
 
 
 
-            <a href="{{route('register')}}">Register?</a>
+            <p>you dont have an account?</p><a href="{{route('register')}}">>go to register<</a>
 
         </div>
     </div>

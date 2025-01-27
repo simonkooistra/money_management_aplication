@@ -25,7 +25,6 @@
         <h1>register</h1>
         <p>make your own account!</p>
 
-
         <input type="text" placeholder="full name..." name="name" id="name" required>
         @error('name')
         <div>{{ $message }}</div>
@@ -43,13 +42,11 @@
 
         <input type="password" placeholder="password..." name="password_confirmation" id="password_confirmation"
                required>
-
-
         <button type="submit" value="Register" class="register_btn">register</button>
     </div>
 
     <div class="container sign_in">
-        <p>Heb je al een account? <a href="{{ route('login') }}">log in</a></p>
+        <p>do you all ready have an account?</p><a href="{{ route('login') }}">>go to log in<</a>
     </div>
 </form>
 </body>
