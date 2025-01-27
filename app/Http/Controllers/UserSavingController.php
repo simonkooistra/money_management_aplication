@@ -19,7 +19,8 @@ class UserSavingController extends Controller
     {
 
         $user_savings = auth()->user()->savings;
-        return view('user_saving.index', ['user_savings' => $user_savings]);
+        return view('user_saving.index', ['user_savings' => UserSaving::where('user_id', auth()->id())->get()
+        ]);
     }
 
     /**

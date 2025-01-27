@@ -25,4 +25,13 @@
             <li>You have no categories yet.</li>
         @endforelse
     </ul>
+
+    <h2>Stats</h2>
+    <ul>
+        <li><strong>This Month:</strong> &#8364;{{ $thisMonth }}</li>
+        <li><strong>Last Month:</strong> &#8364;{{ $lastMonth }}</li>
+        <li><strong>This Year:</strong> &#8364;{{ $thisYear }}</li>
+        <li><strong>Last Year:</strong> &#8364;{{ $lastYear }}</li>
+    </ul>
+
 @endsection

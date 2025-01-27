@@ -21,7 +21,7 @@ class TransactionController extends Controller
     public function index(): View|Factory|Application
     {
         return view('transactions.index', [
-            'transactions' => Transaction::all(),
+            'transactions' => Transaction::where('user_id', auth()->id())->get(),
             'saving' => UserSaving::all(),
             'total' => UserSaving::all()->sum('amount')
         ]);
