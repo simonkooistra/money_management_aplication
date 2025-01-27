@@ -18,8 +18,9 @@ class UserSavingController extends Controller
     public function index(): View|Factory|Application
     {
 
-        $user_savings = auth()->user()->savings();
-        return view('user_saving.index', ['user_savings' => $user_savings]);
+        $user_savings = auth()->user()->savings;
+        return view('user_saving.index', ['user_savings' => UserSaving::where('user_id', auth()->id())->get()
+        ]);
     }
 
     /**
@@ -27,7 +28,7 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->userCategories();
+        $categories = auth()->user()->userCategories;
 
 
         if ($categories->isEmpty()) {
@@ -35,7 +36,7 @@ class UserSavingController extends Controller
             dd('No categories found.');
         }
 
-        // Pass the categories to the view if they exist
+
         return view('user_saving.create', ['categories' => $categories]);
     }
 
@@ -80,7 +81,7 @@ class UserSavingController extends Controller
         }
 
 
-        return view('user_saving.edit', compact('user_saving'));
+        return view('user_saving.edit', ['user_saving' => $user_saving]);
     }
 
     /**

@@ -22,10 +22,10 @@
             <label for="category_id">Category:</label>
 
             <select name="category_id" id="category_id" required>
-                <option value="">-- Select Category --</option> <!-- Placeholder Option -->
+                <option value="">-- Select Category --</option>
 
                 @if($categories->isEmpty())
-                    <option value="">No categories available</option>  <!-- Fallback message -->
+                    <option value="">No categories available</option>
                 @else
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
