@@ -3,10 +3,10 @@
 @section('title', 'Transaction')
 
 @section('content')
-    {{--start of the form with the route trough the controller, with the method post  --}}
+
     <form action="{{route('transaction.store')}}" method="post">
 
-        {{--securety for sending the form--}}
+
         @csrf
         <fieldset>
             <legend>Create transaction:</legend>
