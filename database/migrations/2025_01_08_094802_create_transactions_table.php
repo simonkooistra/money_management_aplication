@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('saving_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');//deletes all data relative to the user
+            $table->foreignId('saving_id')->constrained('user_savings')->OnDelete('cascade');//deletes all relative children.
             $table->char('name');
-            $table->datetimes('add_at');
+            $table->date('make_date')->nullable()->default(null);
             $table->decimal('min_amount', total: 8,places: 2)->nullable();
             $table->decimal('plus_amount', total: 8,places: 2)->nullable();
             $table->timestamps();

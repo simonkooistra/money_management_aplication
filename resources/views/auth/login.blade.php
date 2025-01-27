@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aanmelden</title>
+    <title>log in</title>
 </head>
 
 <body class="login">
@@ -14,10 +14,10 @@
     @csrf
 
     <div class="container">
-        <h1>Aanmelden</h1>
+        <h1>log in</h1>
 
         @error('email')
-        <span class="text-message">{{ $message }}</span>
+        <div class="text-message">{{ $message }}</div>
         @enderror
         <input type="text" placeholder="Email Address" name="email" required>
 
@@ -25,15 +25,15 @@
         <span class="text-message">{{ $message }}</span>
         @enderror
 
-        <input type="password" placeholder="Wachtwoord" name="password" required>
+        <input type="password" placeholder="password" name="password" required>
 
         <div class="container">
 
-            <button type="submit">Aanmelden</button>
+            <button type="submit">log in</button>
 
-{{--            <a href="#">Wachtwoord vergeten?</a>--}}
 
-            <a href="register">Registreren?</a>
+
+            <a href="{{route('register')}}">Register?</a>
 
         </div>
     </div>

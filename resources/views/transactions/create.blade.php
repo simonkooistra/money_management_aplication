@@ -15,7 +15,7 @@
             {{ $message }}<br>
             @enderror
 
-            {{--textfield for the description of the game --}}
+            {{--textfield for the name of the transaction --}}
             <label for="name">name:</label><br>
             <input type="text" id="name" name="name" value=""><br>
 
