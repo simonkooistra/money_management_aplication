@@ -17,7 +17,9 @@ class UserCategoryController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('user_category.index', ['user_categories' => UserCategory::all()]);
+        return view('user_category.index', [
+            'user_categories' => UserCategory::where('user_id', auth()->id())->get()
+        ]);
     }
 
     /**

@@ -26,7 +26,7 @@ class UserSaving extends Model
 
     public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'user_id');
+        return $this->hasMany(Transaction::class, 'saving_id');
     }
 
 }

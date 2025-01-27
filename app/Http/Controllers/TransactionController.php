@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
-use App\Models\User;
 use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -22,7 +20,6 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
-
         return view('transactions.index', [
             'transactions' => Transaction::where('user_id', auth()->user()->id)->get(),
         ]);

@@ -22,4 +22,8 @@ class UserCategory extends Model
     {
         return $this->belongsTo(User::class, '');
     }
+
+    
+
+
 }

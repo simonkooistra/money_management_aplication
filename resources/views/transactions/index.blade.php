@@ -7,6 +7,10 @@
     <table class="transaction">
         <h3>{{auth()->user()->name}} transactions table </h3>
 
+        @if ($transactions->isEmpty())
+            <p>No transactions yet. make one today!</p>
+            <a href="{{route('transaction.create')}}">Add a transaction</a>
+        @else
             <tr>
                 <th>saving name</th>
                 <th>transaction name</th>
@@ -45,5 +49,5 @@
             @endif
 {{--        @endif--}}
     </table>
-    <a href="{{ route('transaction.create') }}">add a transaction?</a>
+    <a href="{{ route('transaction.create') }}">Create a transaction</a>
 @endsection
