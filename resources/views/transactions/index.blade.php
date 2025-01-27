@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             @endif
-{{--        @endif--}}
+
     </table>
     <a href="{{ route('transaction.create') }}">Create a transaction</a>
 @endsection
