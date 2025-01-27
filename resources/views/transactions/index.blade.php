@@ -9,7 +9,6 @@
 
         @if ($transactions->isEmpty())
             <p>No transactions yet. make one today!</p>
-            <a href="{{route('transaction.create')}}">Add a transaction</a>
         @else
             <tr>
                 <th> user_id</th>
@@ -37,5 +36,5 @@
             @endforeach
         @endif
     </table>
-    <a href="{{ route('transaction.create') }}">Aanmaken</a>
+    <a href="{{ route('transaction.create') }}">Create a transaction</a>
 @endsection

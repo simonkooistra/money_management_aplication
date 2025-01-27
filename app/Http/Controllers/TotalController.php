@@ -16,7 +16,6 @@ class TotalController extends Controller
         $savings = Auth::user()->savings;
         $categories = Auth::user()->userCategories;
 
-
         return view('home', [
             'savings' => $savings,
             'categories' => $categories,
