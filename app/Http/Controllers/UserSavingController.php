@@ -20,12 +20,9 @@ class UserSavingController extends Controller
     public function index(): View|Factory|Application
     {
         $user_savings = auth()->user()->savings;
+
         return view('user_saving.index', [
             'user_savings' => $user_savings,
-
-            'transactions' => Transaction::all(),
-            'saving' => UserSaving::all(),
-            'total' => UserSaving::all()->sum('amount')
         ]);
     }
 

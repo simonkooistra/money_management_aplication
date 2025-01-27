@@ -19,6 +19,8 @@
                     <li>                                     {{-- shows the sum of saving and transaction--}}
                         <strong>{{ $goal->name }}</strong> - €{{ $goal->total_amount }}
                         <p>{{ $goal->description }}</p>
+                        <p>Totaal al gespaard: {{ $goal->transactions->sum('amount') }}</p>
+                        <p>Totaal al aan transacties: {{ $goal->transactions->count() }}</p>
 
                         <a href="{{ route('user_saving.edit', $goal->id) }}" class="btn" style="background-color: #ffc107; margin-left: 10px;">Edit</a>
                         <form action="{{ route('user_saving.destroy', $goal->id) }}" method="POST">

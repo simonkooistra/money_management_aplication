@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -21,12 +22,9 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
-//@todo ask about relation
+
         return view('transactions.index', [
-            'transactions' => Transaction::all(),
-            'saving' => UserSaving::all(),
-            'total' => UserSaving::all()->sum('amount'),
-            'user_name'=> User::all()
+            'transactions' => Transaction::where('user_id', auth()->user()->id)->get(),
         ]);
     }
 
