@@ -11,6 +11,11 @@
                 <th>Saving Name</th>
                 <th>Transaction Name</th>
                 <th>Created At</th>
+                <th>
+                    @if($date_made ==! 0)
+                        {{ auth()->user()->name }} add at
+                      @endif
+                </th>
                 <th>Amount</th>
                 <th></th>
                 <th></th>
