@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1>Application Instructions</h1>
-        <p>Welcome to the Saving Goals Application! This guide will explain how to use the application and manage your saving goals and categories effectively.</p>
+        <p>Welcome to GeldVreter! This guide will explain how to use the application and manage your saving goals and categories effectively.</p>
 
         <h2>What is This Application?</h2>
         <p>
