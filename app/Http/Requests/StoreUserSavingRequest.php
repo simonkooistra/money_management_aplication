@@ -22,9 +22,9 @@ class StoreUserSavingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required|exists:user_categories,id',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:500',
+            'category_id' => 'required|exists:user_categories,id|alpha:ascii',
+            'name' => 'required|string|max:20|alpha:ascii',
+            'description' => 'nullable|string|max:200',
             'total_amount' => 'required|numeric|min:0.01',
         ];
     }
