@@ -24,7 +24,7 @@
             <select name="category_id" id="category_id" required>
                 <option value="">-- Select Category --</option>
 
-                @foreach ($categories as $category)
+                @foreach ($userCategory as $category)
                     <option value="{{ $category->id }}"
                             {{ $user_saving->category_id == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}

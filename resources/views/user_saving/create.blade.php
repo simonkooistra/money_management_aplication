@@ -47,5 +47,8 @@
 
             <button type="submit">Create Saving Goal</button>
         </form>
+        <div>
+            <a href="{{ route('user_category.index') }}">cancel..</a>
+        </div>
     </div>
 @endsection

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
-use App\Models\UserCategory;
-use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -20,11 +18,10 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
-
-        $transactions = Transaction::where('user_id', auth()->id())->get();
+        $transactions = auth()->user()->transactions;
         return view('transactions.index', [
             'transactions' => $transactions
-         ]);
+        ]);
     }
 
     /**
@@ -32,12 +29,12 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $category = UserCategory::where('user_id', auth()->id())->get();
+        $categories = auth()->user()->category;
 
-        $savings = UserSaving::where('user_id', auth()->id())->get();
-      return view('transactions.create', [
+        $savings = auth()->user()->saving;
+        return view('transactions.create', [
             'userSavings' => $savings,
-            'category' => $category,
+            'category' => $categories,
         ]);
     }
 
@@ -51,7 +48,6 @@ class TransactionController extends Controller
          * @todo fix validation?
          * @todo ask about make_date is null?
          */
-        $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->make_date = $request->input('make_date');
@@ -98,6 +94,6 @@ class TransactionController extends Controller
     {
         $transaction->delete();
 
-        return to_route('transaction.index', ['transactions' => Transaction::all()]);
+        return to_route('transaction.index', ['transactions' => $transaction]);
     }
 }

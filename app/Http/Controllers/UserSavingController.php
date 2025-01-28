@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserSavingRequest;
 use App\Http\Requests\UpdateUserSavingRequest;
-use App\Models\Transaction;
 use App\Models\UserCategory;
 use App\Models\UserSaving;
 use Illuminate\Contracts\View\Factory;
@@ -19,9 +18,9 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-
-        $user_savings = auth()->user()->savings;
-        return view('user_saving.index', ['user_savings' => UserSaving::where('user_id', auth()->id())->get()
+        $savings = auth()->user()->savings;
+        return view('user_saving.index', [
+            'user_savings' => UserSaving::where('user_id', auth()->id())->get()
         ]);
     }
 
@@ -54,7 +53,7 @@ class UserSavingController extends Controller
         $user_savings->total_amount = $request->input('total_amount');
         auth()->user()->savings()->save($user_savings);
 
-        return to_route('user_saving.index', ['user_savings']);
+        return to_route('user_saving.index', ['user_savings', 'user_categories']);
     }
 
     /**
@@ -75,13 +74,13 @@ class UserSavingController extends Controller
         }
 
 
-        return view('user_saving.edit', ['user_saving' => $user_saving]);
+        return view('user_saving.edit', ['user_saving' => $user_saving, ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserSavingRequest $request, UserSaving $user_savings): RedirectResponse
+    public function update(UpdateUserSavingRequest $request, UserSaving $user_savings, UserCategory $userCategory): RedirectResponse
     {
 //
         $user_savings->category_id = $request->input('category_id');
@@ -90,7 +89,10 @@ class UserSavingController extends Controller
         $user_savings->total_amount = $request->input('total_amount');
         $user_savings->save();
 
-        return to_route('user_saving.index', ['user_savings']);
+        return to_route('user_saving.index', [
+            'user_savings' => $user_savings,
+            'user_categories' => $userCategory
+        ]);
     }
 
     /**

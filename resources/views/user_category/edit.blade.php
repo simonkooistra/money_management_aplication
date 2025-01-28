@@ -25,5 +25,8 @@
 
             <button type="submit" class="btn btn-primary mt-3">Update</button>
         </form>
+        <div>
+            <a href="{{ route('user_category.index') }}">cancel..</a>
+        </div>
     </div>
 @endsection
