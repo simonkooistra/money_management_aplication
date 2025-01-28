@@ -72,6 +72,7 @@ class UserCategoryController extends Controller
     }
 
     /**
+     * @todo make delete work again
      * Remove the specified resource from storage.
      */
     public function destroy(UserCategory $user_category): RedirectResponse

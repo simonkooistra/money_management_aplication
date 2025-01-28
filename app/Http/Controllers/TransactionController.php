@@ -20,7 +20,10 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
+
+        $transactions = Transaction::where('user_id', auth()->id())->get();
         return view('transactions.index', [
+            'transactions' => $transactions
          ]);
     }
 
@@ -45,7 +48,8 @@ class TransactionController extends Controller
     {
         $transaction = new Transaction();
         /**
-         * @todo fix validation
+         * @todo fix validation?
+         * @todo ask about make_date is null?
          */
         $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');

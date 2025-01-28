@@ -94,8 +94,10 @@ class UserSavingController extends Controller
     }
 
     /**
+     * @todo make delete work again
      * Remove the specified resource from storage.
      */
+
     public function destroy(UserSaving $user_saving): Factory|Application|View
     {
         $user_saving->delete();
