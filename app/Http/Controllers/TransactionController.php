@@ -21,8 +21,7 @@ class TransactionController extends Controller
     public function index(): View|Factory|Application
     {
         return view('transactions.index', [
-            'transactions' => Transaction::where('user_id', auth()->user()->id)->get(),
-        ]);
+         ]);
     }
 
     /**
@@ -33,8 +32,7 @@ class TransactionController extends Controller
         $category = UserCategory::where('user_id', auth()->id())->get();
 
         $savings = UserSaving::where('user_id', auth()->id())->get();
-
-        return view('transactions.create', [
+      return view('transactions.create', [
             'userSavings' => $savings,
             'category' => $category,
         ]);
@@ -52,6 +50,7 @@ class TransactionController extends Controller
         $transaction->user_id = $request->input('user_id');
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
+        $transaction->make_date = $request->input('make_date');
         $transaction->amount = $request->input('amount');
 
         auth()->user()->transactions()->save($transaction);
@@ -81,6 +80,7 @@ class TransactionController extends Controller
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
         $transaction->name = $request->input('name');
+        $transaction->make_date = $request->input('make_date');
         $transaction->amount = $request->input('amount');
         auth()->user()->transactions()->save($transaction);
 

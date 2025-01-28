@@ -23,7 +23,10 @@ class UpdateUserSavingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required|exists:user_categories,id|alpha:ascii',
+            'name' => 'required|string|max:20|alpha:ascii',
+            'description' => 'nullable|string|max:200',
+            'total_amount' => 'required|numeric|min:0.01',
         ];
     }
 }

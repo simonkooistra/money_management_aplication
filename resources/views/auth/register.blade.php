@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registreren</title>
+    <title>register</title>
 </head>
 
 <body class="login">
@@ -16,40 +16,37 @@
     @if($errors->any())
         <div>
             @foreach ($errors->all() as $error)
-                <p style="color:red;">{{ $error }}</p>
+                <div>{{ $error }}</div>
             @endforeach
         </div>
     @endif
 
     <div class="container">
-        <h1>Account registreren</h1>
-        <p>Maak hier uw account aan!</p>
+        <h1>register</h1>
+        <p>make an account!</p>
 
-
-        <input type="text" placeholder="Volledige naam" name="name" id="name" required>
+        <input type="text" placeholder="full name..." name="name" id="name" required>
         @error('name')
-        <span style="color:red;">{{ $message }}</span>
+        <div>{{ $message }}</div>
         @enderror
 
-        <input type="text" placeholder="Email Address" name="email" id="email" required>
+        <input type="text" placeholder="email address" name="email" id="email" required>
         @error('email')
-        <span style="color:red;">{{ $message }}</span>
+        <div>{{ $message }}</div>
         @enderror
 
-        <input type="password" placeholder="Wachtwoord" name="password" id="password" required>
+        <input type="password" placeholder="password..." name="password" id="password" required>
         @error('password')
-        <span style="color:red;">{{ $message }}</span>
+        <div>{{ $message }}</div>
         @enderror
 
-        <input type="password" placeholder="Herhaal wachtwoord" name="password_confirmation" id="password_confirmation"
+        <input type="password" placeholder="password..." name="password_confirmation" id="password_confirmation"
                required>
-
-
-        <button type="submit" value="Register" class="registerbtn">Registreren</button>
+        <button type="submit" value="Register" class="register_btn">register</button>
     </div>
 
-    <div class="container signin">
-        <p>Heb je al een account? <a href="{{ route('login') }}">Log in</a></p>
+    <div class="container sign_in">
+        <p>do you all ready have an account?</p><a href="{{ route('login') }}">>go to log in<</a>
     </div>
 </form>
 </body>
