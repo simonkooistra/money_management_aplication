@@ -20,11 +20,10 @@ class TransactionController extends Controller
 
     public function index(): View|Factory|Application
     {
-
         $transactions = Transaction::where('user_id', auth()->id())->get();
         return view('transactions.index', [
             'transactions' => $transactions
-         ]);
+        ]);
     }
 
     /**
@@ -35,7 +34,7 @@ class TransactionController extends Controller
         $category = UserCategory::where('user_id', auth()->id())->get();
 
         $savings = UserSaving::where('user_id', auth()->id())->get();
-      return view('transactions.create', [
+        return view('transactions.create', [
             'userSavings' => $savings,
             'category' => $category,
         ]);
@@ -96,7 +95,11 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction): RedirectResponse
     {
-        $transaction->delete();
+        if (auth()->id() === $transaction->user_id) {
+            $transaction->delete();
+        } else {
+            echo("This is not yours!");
+        }
 
         return to_route('transaction.index', ['transactions' => Transaction::all()]);
     }

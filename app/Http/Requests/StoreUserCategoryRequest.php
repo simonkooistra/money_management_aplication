@@ -24,7 +24,7 @@ class StoreUserCategoryRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer|exists:users,id',
-            'name' => 'required|unique|string|max:20|alpha:ascii'
+            'name' => 'required|unique:user_categories|string|max:20|alpha:ascii'
         ];
     }
 }
