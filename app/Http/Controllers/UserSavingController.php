@@ -100,8 +100,10 @@ class UserSavingController extends Controller
 
     public function destroy(UserSaving $user_saving): Factory|Application|View
     {
-        $user_saving->delete();
+        if (auth()->id() === $user_saving->user_id) {
+            $user_saving->delete();
 
+        }
         return view('user_saving.index', ['user_savings' => UserSaving::all()]);
     }
 }

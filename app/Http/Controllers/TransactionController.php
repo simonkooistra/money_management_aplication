@@ -101,6 +101,6 @@ class TransactionController extends Controller
             echo("This is not yours!");
         }
 
-        return to_route('transaction.index', ['transactions' => Transaction::all()]);
+        return to_route('transaction.index', ['transactions' => $transaction]);
     }
 }
