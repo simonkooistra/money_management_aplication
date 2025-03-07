@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('w')->OnDelete('cascade');//deletes all relative children.
+            $table->foreignId('user_id')->constrained('users')->OnDelete('cascade');//deletes all relative children.
             $table->char('name')->unique();
             $table->timestamps();
         });
