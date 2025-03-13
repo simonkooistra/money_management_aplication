@@ -10,6 +10,7 @@ let config = {
 
         laravel({
 
+            refresh:true,
             input: [
 
                 'resources/css/app.css',

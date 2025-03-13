@@ -14,7 +14,8 @@
     @csrf
 
     <div class="container">
-        <h1>log in</h1>
+        <h1>welcome to geldvreter</h1>
+        <h2>login</h2>
 
         @error('email')
         <div class="text-message">{{ $message }}</div>
@@ -28,12 +29,11 @@
         <input type="password" placeholder="password" name="password" required>
 
         <div class="container">
-
-            <button type="submit">log in</button>
-
+            <button type="submit">login</button>
 
 
-            <p>you dont have an account?</p><a href="{{route('register')}}">>go to register<</a>
+            <h3>become a member</h3>
+            <a href="{{route('register')}}" id="rg-lnk"><p>make a new account!</p></a>
 
         </div>
     </div>
