@@ -23,11 +23,11 @@
         <input type="text" placeholder="Email Address" name="email" required>
 
         @error('password')
-        <span class="text-message">{{ $message }}</span>
+        <div class="text-message">{{ $message }}</div>
         @enderror
 
         <input type="password" placeholder="password" name="password" required>
-
+        <input type="checkbox" onclick="showPsw()"><p>show password</p>
         <div class="container">
             <button type="submit">login</button>
 
@@ -40,5 +40,5 @@
 
 </form>
 </body>
-
+@vite(['resources/js/app.js'])
 </html>
