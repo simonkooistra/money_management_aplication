@@ -42,11 +42,11 @@
                required>
         <div id="btn-container">
             <h4>show password</h4>
-         <input type="checkbox">
-        <button type="submit" value="Register" class="register_btn">register</button>
-    <div class="container sign_in">
-        <a href="{{ route('login') }}" id="rg-lnk">back to login-page</a>
-    </div>
+            <input type="checkbox" id="checkBoxSpw">
+            <button type="submit" value="Register" class="register_btn">register</button>
+            <div class="container sign_in">
+                <a href="{{ route('login') }}" id="rg-lnk">back to login-page</a>
+            </div>
         </div>
     </div>
 

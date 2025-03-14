@@ -26,15 +26,13 @@
         <div class="text-message">{{ $message }}</div>
         @enderror
 
-        <input type="password" placeholder="password" name="password" required>
-        <input type="checkbox" onclick="showPsw()"><p>show password</p>
-        <div class="container">
+        <input type="password" id="password" placeholder="password" name="password" required>
+        <div class="action-container">
+            <p>show password</p>
+            <input type="checkbox" id="checkBoxSpw">
             <button type="submit">login</button>
-
-
             <h3>become a member</h3>
             <a href="{{route('register')}}" id="rg-lnk"><p>make a new account!</p></a>
-
         </div>
     </div>
 
