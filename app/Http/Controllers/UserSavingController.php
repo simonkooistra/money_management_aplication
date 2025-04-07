@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UserSavingController extends Controller
 {
@@ -20,8 +21,8 @@ class UserSavingController extends Controller
     public function index(): View|Factory|Application
     {
 
-        $user_savings = auth()->user()->savings;
-        return view('user_saving.index', ['user_savings' => UserSaving::where('user_id', auth()->id())->get()
+        $user_savings = UserSaving::where('user-id', auth()->id())->get();
+        return view('user_saving.index', ['user_savings' => $user_savings
         ]);
     }
 
