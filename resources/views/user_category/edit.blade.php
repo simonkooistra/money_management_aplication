@@ -22,8 +22,10 @@
                 <label for="name">Category Name:</label>
                 <input type="text" name="name" id="name" required class="form-control" value="{{ old('name', $user_category->name) }}">
             </div>
-
-            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <div>
+                <button type="submit" onclick="return confirm(`are you sure you want to change: {{old('name',$user_category->name)}} to: {{$user_category->name}}?`)" class="btn-category-delete">update</button>
+                <a href="{{route('user_category.index')}}" onclick="return confirm(`are you sure you want to cancel on: {{old('name',$user_category->name)}}?`)" class="btn-category-delete">cancel</a>
+            </div>
         </form>
     </div>
 @endsection
