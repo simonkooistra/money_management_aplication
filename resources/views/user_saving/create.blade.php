@@ -24,10 +24,10 @@
             <select name="category_id" id="category_id" required>
                 <option value="">-- Select Category --</option>
 
-                @if($categories->isEmpty())
+                @if($user_categories->isEmpty())
                     <option value="">No categories available</option>
                 @else
-                    @foreach ($categories as $category)
+                    @foreach ($user_categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>

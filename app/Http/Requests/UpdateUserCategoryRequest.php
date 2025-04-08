@@ -23,8 +23,8 @@ class UpdateUserCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
-            'name' => 'required|unique|string|max:20|alpha:ascii'
+            'user_id' => 'integer|exists:users,id',
+            'name' => 'required|unique:user_categories,name|min:1|max:50'
         ];
     }
 }
