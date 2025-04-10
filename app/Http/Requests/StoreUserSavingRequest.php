@@ -8,10 +8,11 @@ class StoreUserSavingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     */
+     *///   @todo: validation for all store and update
+
     public function authorize(): bool
     {
-        return true;
+      return auth()->check();
     }
 
     /**

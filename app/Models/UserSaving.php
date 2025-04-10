@@ -19,9 +19,9 @@ class UserSaving extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function user_Category(): BelongsTo
+    public function user_category(): BelongsTo
     {
-        return $this->belongsTo(UserCategory::class);
+        return $this->belongsTo(UserCategory::class, 'user_id');
     }
 
     public function transactions(): HasMany

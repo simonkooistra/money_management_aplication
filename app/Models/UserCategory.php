@@ -13,6 +13,8 @@ class UserCategory extends Model
 
     protected $fillable = ['user_id', 'name'];
 
+//    protected $table = 'user_categories';
+
     public function savings(): HasMany
     {
         return $this->hasMany(UserSaving::class);
@@ -20,7 +22,7 @@ class UserCategory extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, '');
+        return $this->belongsTo(User::class);
     }
 
     
