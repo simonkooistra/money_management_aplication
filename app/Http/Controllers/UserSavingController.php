@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UserSavingController extends Controller
 {
@@ -18,9 +19,11 @@ class UserSavingController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $savings = auth()->user()->savings;
-        return view('user_saving.index', [
-            'user_savings' => UserSaving::where('user_id', auth()->id())->get()
+        $user_savings = UserSaving::where('user-id', auth()->id())->get();
+        $user_categories = UserCategory::where('user_id', auth()->id())->get();
+        return view('user_saving.index', ['user_savings' => $user_savings,
+            'user_categories' => $user_categories
+
         ]);
     }
 
@@ -29,15 +32,13 @@ class UserSavingController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->userCategories;
-        $category = UserCategory::where('user_id', auth()->id())->get();
 
-        if ($categories->isEmpty()) {
-            dd('No categories found.');
-        }
-
-
-        return view('user_saving.create', ['categories' => $categories]);
+        $user_categories = UserCategory::where('user_id', auth()->id())->get();
+        $user_savings = UserSaving::where('user_id', auth()->id())->get();
+        return view('user_saving.create', [
+            'user_categories' => $user_categories,
+            'user_savings' => $user_savings
+        ]);
     }
 
     /**
@@ -52,6 +53,7 @@ class UserSavingController extends Controller
         $user_savings->description = $request->input('description');
         $user_savings->total_amount = $request->input('total_amount');
         auth()->user()->savings()->save($user_savings);
+        //@todo: look at savings() see whats wrong.
 
         return to_route('user_saving.index', ['user_savings', 'user_categories']);
     }
@@ -102,8 +104,10 @@ class UserSavingController extends Controller
 
     public function destroy(UserSaving $user_saving): Factory|Application|View
     {
-        $user_saving->delete();
+        if (auth()->id() === $user_saving->user_id) {
+            $user_saving->delete();
 
+        }
         return view('user_saving.index', ['user_savings' => UserSaving::all()]);
     }
 }

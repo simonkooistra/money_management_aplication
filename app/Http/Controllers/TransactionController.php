@@ -15,13 +15,14 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index(): View|Factory|Application
     {
         $transactions = auth()->user()->transactions;
-        return view('transactions.index', [
-            'transactions' => $transactions
-        ]);
+
+        return view(
+            'transactions.index',
+            ['transactions' => $transactions]
+        );
     }
 
     /**
@@ -29,13 +30,11 @@ class TransactionController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = auth()->user()->category;
-
-        $savings = auth()->user()->saving;
-        return view('transactions.create', [
-            'userSavings' => $savings,
-            'category' => $categories,
-        ]);
+        $savings = auth()->user()->savings;
+        return view(
+            'transactions.create',
+            ['userSavings' => $savings,]
+        );
     }
 
     /**
@@ -44,26 +43,16 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request): RedirectResponse
     {
         $transaction = new Transaction();
-        /**
-         * @todo fix validation?
-         * @todo ask about make_date is null?
-         */
+
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->make_date = $request->input('make_date');
         $transaction->amount = $request->input('amount');
-
         auth()->user()->transactions()->save($transaction);
 
-        return to_route('transaction.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction): View|Factory|Application
-    {
-        return view('transactions.show', ['transaction' => $transaction]);
+        return redirect()->
+        route('transaction.index')->
+        with('success', 'transaction successfully created!');
     }
 
     /**
@@ -71,7 +60,10 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction): View|Factory|Application
     {
-        return view('transactions.edit', ['transaction' => $transaction]);
+        if (auth()->id() === $transaction->user_id) {
+            return view('transactions.edit')->
+            with('succcess', 'transaction successfully edited!');
+        }
     }
 
     /**
@@ -79,12 +71,14 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction): RedirectResponse
     {
-        $transaction->name = $request->input('name');
-        $transaction->make_date = $request->input('make_date');
-        $transaction->amount = $request->input('amount');
-        auth()->user()->transactions()->save($transaction);
-
-        return to_route('transaction.index');
+        if (auth()->id() === $transaction->user_id) {
+            $transaction->name = $request->input('name');
+            $transaction->make_date = $request->input('make_date');
+            $transaction->amount = $request->input('amount');
+            auth()->user()->transactions()->save($transaction);
+        }
+        return redirect()->route('transaction.index')->
+        with('success', 'transaction successfully edited');
     }
 
     /**
@@ -92,8 +86,11 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction): RedirectResponse
     {
-        $transaction->delete();
+        if (auth()->id() === $transaction->user_id) {
+            $transaction->delete();
+        }
+        return redirect()->route('transaction.index')->
+        with('success', 'transaction successfully destroyed!');
 
-        return to_route('transaction.index', ['transactions' => $transaction]);
     }
 }

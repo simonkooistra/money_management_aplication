@@ -14,7 +14,8 @@
     @csrf
 
     <div class="container">
-        <h1>log in</h1>
+        <h1>welcome to geldvreter</h1>
+        <h2>login</h2>
 
         @error('email')
         <div class="text-message">{{ $message }}</div>
@@ -22,23 +23,20 @@
         <input type="text" placeholder="Email Address" name="email" required>
 
         @error('password')
-        <span class="text-message">{{ $message }}</span>
+        <div class="text-message">{{ $message }}</div>
         @enderror
 
-        <input type="password" placeholder="password" name="password" required>
-
-        <div class="container">
-
-            <button type="submit">log in</button>
-
-
-
-            <p>you dont have an account?</p><a href="{{route('register')}}">>go to register<</a>
-
+        <input type="password" id="password" placeholder="password" name="password" required>
+        <div class="action-container">
+            <p>show password</p>
+            <input type="checkbox" id="checkBoxSpw">
+            <button type="submit">login</button>
+            <h3>become a member</h3>
+            <a href="{{route('register')}}" id="rg-lnk"><p>make a new account!</p></a>
         </div>
     </div>
 
 </form>
 </body>
-
+@vite(['resources/js/app.js'])
 </html>

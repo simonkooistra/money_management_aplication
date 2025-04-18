@@ -12,7 +12,7 @@ class StoreUserCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -20,11 +20,12 @@ class StoreUserCategoryRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array|string>
      */
+    //@todo: change the rules: 'user id field is required'
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
-            'name' => 'required|unique|string|max:20|alpha:ascii'
+            'user_id' => 'integer|exists:users,id',
+            'name' => 'required|unique:user_categories|string|min:1|max:20'
         ];
     }
 }

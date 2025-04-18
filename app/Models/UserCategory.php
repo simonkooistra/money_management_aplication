@@ -13,6 +13,8 @@ class UserCategory extends Model
 
     protected $fillable = ['user_id', 'name'];
 
+//    protected $table = 'user_categories';
+
     public function savings(): HasMany
     {
         return $this->hasMany(UserSaving::class);

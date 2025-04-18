@@ -4,16 +4,28 @@
 
 @section('content')
     <div class="container">
-        <h1>Saving Goals</h1>
+        @if($user_categories->isEmpty())
+            <h2>categories</h2>
+            <p> no categories created yet.
+            to create a saving goal, you first have to create a category.
+            please click the link below to create a category.</p>
+            <a href="{{route('user_category.create')}}" class="btn">click to create category</a>
+        @endif
+
+
+
+
+        <h2>Saving Goals</h2>
 
 
         <a href="{{ route('user_saving.create') }}" class="btn">add a New saving goal</a>
-
+            {{--@todo: look add class="btn"change if necessary: because its ugly. --}}
 
         @if ($user_savings->isEmpty())
             <p>No saving goals yet. Start one today!</p>
         @else
-
+{{--            @todo: change $goal to $saving--}}
+{{--        @todo: change CSS to compete the overall feel and look of page--}}
             <ul>
                 @foreach ($user_savings as $goal)
                     <li>                                     {{-- shows the sum of saving and transaction--}}

@@ -17,9 +17,11 @@ class UserCategoryController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('user_category.index', [
-            'user_categories' => UserCategory::where('user_id', auth()->id())->get()
-        ]);
+        $user_categories = auth()->user()->usercategories;
+        return view(
+            'user_category.index',
+            ['user_categories' => $user_categories]
+        );
     }
 
     /**
@@ -27,7 +29,11 @@ class UserCategoryController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        return view('user_category.create');
+        $user_categories = auth()->user()->usercategories;
+        return view(
+            'user_category.create',
+            ['user_categories' => $user_categories]
+        );
     }
 
     /**
@@ -35,20 +41,13 @@ class UserCategoryController extends Controller
      */
     public function store(StoreUserCategoryRequest $request): RedirectResponse
     {
-        $user_category = new UserCategory();
-        $user_category->user_id = auth()->id();
-        $user_category->name = $request->input('name');
-        auth()->user()->userCategories()->save($user_category);
+        $user_categories = new UserCategory();
+        $user_categories->name = $request->input('name');
+        auth()->user()->usercategories()->save($user_categories);
 
-        return redirect()->route('user_category.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserCategory $user_category): View|Factory|Application
-    {
-        return view('user_category.index', ['user_categories' => $user_category]);
+        return redirect()->
+        route('user_category.index')->
+        with('success', 'category successfully created!');
     }
 
     /**
@@ -56,7 +55,9 @@ class UserCategoryController extends Controller
      */
     public function edit(UserCategory $user_category): View|Factory|Application
     {
-        return view('user_category.edit', ['user_category' => $user_category]);
+        if (auth()->id() === $user_category->user_id) {
+            return view('user_category.edit');
+        }
     }
 
     /**
@@ -64,11 +65,13 @@ class UserCategoryController extends Controller
      */
     public function update(UpdateUserCategoryRequest $request, UserCategory $user_category): RedirectResponse
     {
-        $user_category->user_id = $request->input('user_id');
-        $user_category->name = $request->input('name');
-        auth()->user()->userCategories()->save($user_category);
-
-        return to_route('user_category.index', ['user_categories' => UserCategory::all()]);
+        if (auth()->id() === $user_category->user_id) {
+            $user_category->name = $request->input('name');
+            auth()->user()->userCategories()->save($user_category);
+        }
+        return redirect()->
+        route('user_category.index')->
+        with('success', 'category successfully edited!');
     }
 
     /**
@@ -77,7 +80,11 @@ class UserCategoryController extends Controller
      */
     public function destroy(UserCategory $user_category): RedirectResponse
     {
-        $user_category->delete();
-        return to_route('user_category.index', ['user_categories' => UserCategory::all()]);
+        if (auth()->id() === $user_category->user_id) {
+            $user_category->delete();
+        }
+
+        return redirect()->route('user_category.index')->
+        with('success', 'category successfully destroyed!');
     }
 }

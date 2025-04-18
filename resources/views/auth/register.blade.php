@@ -16,38 +16,41 @@
     @if($errors->any())
         <div>
             @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
+                <div class="text-message">{{ $error }}</div>
             @endforeach
         </div>
     @endif
 
     <div class="container">
-        <h1>register</h1>
-        <p>make an account!</p>
+        <h1>Register</h1>
+        <h3>Make an account</h3>
 
         <input type="text" placeholder="full name..." name="name" id="name" required>
         @error('name')
-        <div>{{ $message }}</div>
+        <div class="text-message">{{ $message }}</div>
         @enderror
 
         <input type="text" placeholder="email address" name="email" id="email" required>
         @error('email')
-        <div>{{ $message }}</div>
+        <div class="text-message">{{ $message }}</div>
         @enderror
-
         <input type="password" placeholder="password..." name="password" id="password" required>
         @error('password')
-        <div>{{ $message }}</div>
+        <div class="text-message">{{ $message }}</div>
         @enderror
-
         <input type="password" placeholder="password..." name="password_confirmation" id="password_confirmation"
                required>
-        <button type="submit" value="Register" class="register_btn">register</button>
+        <div id="btn-container">
+            <h4>show password</h4>
+            <input type="checkbox" id="checkBoxSpw">
+            <button type="submit" value="Register" class="register_btn">register</button>
+            <div class="container sign_in">
+                <a href="{{ route('login') }}" id="rg-lnk">back to login-page</a>
+            </div>
+        </div>
     </div>
 
-    <div class="container sign_in">
-        <p>do you all ready have an account?</p><a href="{{ route('login') }}">>go to log in<</a>
-    </div>
 </form>
+@vite(['resources/js/app.js'])
 </body>
 </html>
