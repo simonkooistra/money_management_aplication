@@ -27,5 +27,8 @@
                 <a href="{{route('user_category.index')}}" onclick="return confirm(`are you sure you want to cancel on: {{$user_category->name}}?`)" class="btn-category-delete">cancel</a>
             </div>
         </form>
+        <div>
+            <a href="{{ route('user_category.index') }}">cancel..</a>
+        </div>
     </div>
 @endsection

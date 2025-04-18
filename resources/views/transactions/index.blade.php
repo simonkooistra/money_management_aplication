@@ -14,14 +14,14 @@
                 <a href="{{ route('transaction.create') }}">make first transaction?</a>
             </li>
         </ul>
-    @endif
+    @else
         <table class="transaction">
             <tr>
                 <th>Saving Name</th>
                 <th>Transaction Name</th>
                 <th>Created At</th>
                 <th>
-
+{{--@todo make it work please!?--}}
 {{--                    @if($transactions->make_date ==! 0)--}}
 {{--                        {{ auth()->user()->name }} add at--}}
 {{--                      @endif--}}
@@ -47,6 +47,8 @@
                     </td>
                 </tr>
             @endforeach
-    </table>
-    <a href="{{ route('transaction.create') }}">Create a transaction</a>
+        </table>
+
+        <a href="{{ route('transaction.create') }}">Create a transaction</a>
+    @endif
 @endsection

@@ -18,6 +18,7 @@ class TransactionController extends Controller
     public function index(): View|Factory|Application
     {
         $transactions = auth()->user()->transactions;
+
         return view(
             'transactions.index',
             ['transactions' => $transactions]
@@ -42,6 +43,7 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request): RedirectResponse
     {
         $transaction = new Transaction();
+
         $transaction->saving_id = $request->input('saving_id');
         $transaction->name = $request->input('name');
         $transaction->make_date = $request->input('make_date');
@@ -87,8 +89,8 @@ class TransactionController extends Controller
         if (auth()->id() === $transaction->user_id) {
             $transaction->delete();
         }
-
         return redirect()->route('transaction.index')->
         with('success', 'transaction successfully destroyed!');
+
     }
 }

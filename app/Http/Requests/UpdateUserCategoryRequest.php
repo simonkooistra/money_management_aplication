@@ -24,6 +24,7 @@ class UpdateUserCategoryRequest extends FormRequest
     {
         return [
             'user_id' => 'integer|exists:users,id',
+
             'name' => 'required|unique:user_categories,name|min:1|max:50'
         ];
     }
